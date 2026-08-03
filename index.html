@@ -1,1 +1,79 @@
-PLACEHOLDER
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KCN Super Cognitive — Command Center</title>
+  <link rel="stylesheet" href="css/command-center.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div id="boot-overlay" class="boot-overlay">
+    <div class="boot-content">
+      <div class="boot-core" id="boot-core"></div>
+      <h1 class="boot-title">KCN</h1>
+      <p class="boot-subtitle">SUPER COGNITIVE</p>
+      <p class="boot-tagline">Human-Governed Intelligence Ecosystem</p>
+      <div class="boot-log" id="boot-log"></div>
+      <button id="enter-btn" class="enter-btn hidden">ENTER COMMAND CENTER</button>
+    </div>
+  </div>
+  <div id="command-center" class="command-center hidden">
+    <header class="top-bar">
+      <div class="brand"><div class="brand-mark">KCN</div><div class="brand-text"><span class="brand-name">SUPER COGNITIVE</span><span class="brand-sub">Human-Governed Intelligence</span></div></div>
+      <div class="system-status">
+        <div class="status-item"><span class="dot online"></span> Core</div>
+        <div class="status-item"><span class="dot online"></span> Governance</div>
+        <div class="status-item"><span class="dot online"></span> Memory</div>
+        <div class="status-item"><span class="dot standby" id="status-security"></span> Security</div>
+      </div>
+      <div class="controls">
+        <div class="toggle-group"><label class="toggle-label">Jarvis</label><button id="jarvis-toggle" class="toggle-btn" data-state="off" aria-pressed="false"><span class="toggle-track"><span class="toggle-thumb"></span></span><span class="toggle-text">OFF</span></button></div>
+        <div class="toggle-group"><label class="toggle-label">Sound</label><button id="sound-toggle" class="toggle-btn" data-state="on" aria-pressed="true"><span class="toggle-track"><span class="toggle-thumb"></span></span><span class="toggle-text">ON</span></button></div>
+        <div class="visibility-mode"><select id="visibility-mode"><option value="simple">Simple</option><option value="guided" selected>Guided</option><option value="expert">Expert</option></select></div>
+      </div>
+    </header>
+    <main class="workspace">
+      <section class="panel mission-panel">
+        <div class="panel-header"><h2>Mission Console</h2><span class="panel-badge" id="mission-status">Ready</span></div>
+        <div class="chat-area" id="chat-area"><div class="message system"><div class="msg-label">KCN Core</div><div class="msg-body">System online. What will you create?</div></div></div>
+        <div class="mission-input-area">
+          <div class="quick-missions">
+            <button class="chip" data-mission="build">Build an app</button>
+            <button class="chip" data-mission="learn">Learn a skill</button>
+            <button class="chip" data-mission="secure">Secure a system</button>
+            <button class="chip" data-mission="analyze">Analyze project</button>
+            <button class="chip" data-mission="grow">Find my strengths</button>
+          </div>
+          <div class="input-row"><input type="text" id="mission-input" placeholder="What do you want to accomplish?" autocomplete="off" /><button id="send-mission" class="primary-btn">Send</button></div>
+        </div>
+      </section>
+      <section class="panel core-panel">
+        <div class="core-stage" id="core-stage">
+          <canvas id="particle-canvas"></canvas>
+          <div class="neural-core" id="neural-core"><div class="core-inner"></div><div class="core-ring ring-1"></div><div class="core-ring ring-2"></div><div class="core-ring ring-3"></div><div class="core-label">KCN CORE</div></div>
+          <div class="module-node" data-module="companion" style="--x:18%; --y:22%;"><div class="node-orb"></div><div class="node-label">Human AI Companion</div><div class="node-status">Standby</div></div>
+          <div class="module-node" data-module="kronos" style="--x:78%; --y:18%;"><div class="node-orb"></div><div class="node-label">Kronos Vibe Coder</div><div class="node-status">Standby</div></div>
+          <div class="module-node" data-module="vibedev" style="--x:85%; --y:55%;"><div class="node-orb"></div><div class="node-label">Vibe Developer</div><div class="node-status">Standby</div></div>
+          <div class="module-node" data-module="cyber" style="--x:15%; --y:58%;"><div class="node-orb"></div><div class="node-label">Cybersecurity</div><div class="node-status">Standby</div></div>
+          <div class="module-node" data-module="akiis" style="--x:50%; --y:82%;"><div class="node-orb"></div><div class="node-label">KCN-AKIIS</div><div class="node-status">Standby</div></div>
+          <div class="module-node" data-module="marketplace" style="--x:72%; --y:78%;"><div class="node-orb"></div><div class="node-label">AI Marketplace</div><div class="node-status">Standby</div></div>
+          <div class="module-node" data-module="testing" style="--x:28%; --y:80%;"><div class="node-orb"></div><div class="node-label">AI Testing Engines</div><div class="node-status">Standby</div></div>
+        </div>
+      </section>
+      <section class="panel side-panel">
+        <div class="governance-card"><h3>Human Governance</h3><div class="gov-row"><span>AI Actions</span><span class="badge monitored">MONITORED</span></div><div class="gov-row"><span>Pending Approvals</span><span class="badge" id="pending-count">0</span></div><div class="gov-row"><span>Emergency Stop</span><button class="danger-btn" id="emergency-stop">READY</button></div><div id="approval-queue" class="approval-queue"></div></div>
+        <div class="timeline-card"><h3>Chronos Ledger</h3><div class="timeline" id="timeline"><div class="tl-item"><div class="tl-time">--:--:--</div><div class="tl-event">System awaiting first mission</div></div></div></div>
+        <div class="resource-card"><h3>Cognitive Resource Manager</h3><div class="resource-bar"><span>Compute</span><div class="bar"><div class="fill" id="compute-fill" style="width:12%"></div></div><span id="compute-pct">12%</span></div><div class="resource-bar"><span>Active Modules</span><div class="bar"><div class="fill green" id="modules-fill" style="width:0%"></div></div><span id="modules-pct">0 / 7</span></div></div>
+      </section>
+    </main>
+    <footer class="bottom-bar"><div class="footer-left"><span id="current-mission">No active mission</span></div><div class="footer-right"><span>KCN Command Center v0.1 · Prototype</span></div></footer>
+  </div>
+  <script src="js/particles.js"></script>
+  <script src="js/modules.js"></script>
+  <script src="js/directory.js"></script>
+  <script src="js/chronos.js"></script>
+  <script src="js/jarvis.js"></script>
+  <script src="js/command-center.js"></script>
+</body>
+</html>
